@@ -1,0 +1,22 @@
+@mixin flex($gap, $direction: row, $wrap: nowrap) {
+  display: flex;
+  gap: $gap;
+  flex-direction: $direction;
+  flex-wrap: $wrap;
+}
+
+@mixin typography($color, $size: $font-size-sm, $weight: 400) {
+  color: $color;
+  font-family: 'SF Pro Display', sans-serif;
+  font-size: $size;
+  font-weight: $weight;
+}
+
+@mixin glassed($opacity: 0.15, $blur: 4px) {
+  background: rgba(255, 255, 255, $opacity);
+
+  @if($blur) {
+    backdrop-filter: blur($blur);
+    -webkit-backdrop-filter: blur($blur);
+  }
+}

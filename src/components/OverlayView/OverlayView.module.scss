@@ -1,0 +1,56 @@
+.overlay {
+  position: relative;
+
+  &-view {
+    position: absolute;
+    transform: translate(1px, 1px);
+    min-width: 200px;
+
+    padding: $spacer * 0.5;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: $spacer * 0.25;
+
+    @include glassed();
+    -webkit-box-shadow: 0px 0px 35px 4px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0px 0px 35px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 35px 4px rgba(0, 0, 0, 0.1);
+
+    @include typography(#fff, $font-size-sm);
+
+    &--content {
+      &-splitter {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+      }
+
+      &-group {
+        color: #fff;
+
+        &-item {
+          @include flex($spacer);
+          align-items: center;
+
+          padding: 0 $spacer * 0.75;
+
+          &--shortcuts {
+            transition: all 0.25s;
+          }
+
+          &:hover &--shortcuts {
+            color: #fff;
+          }
+
+          &:hover {
+            background: #1459c3;
+            border-radius: $spacer * 0.25;
+          }
+
+          & span {
+            flex-grow: 1;
+            padding: 0;
+            max-width: none;
+          }
+        }
+      }
+    }
+  }
+}

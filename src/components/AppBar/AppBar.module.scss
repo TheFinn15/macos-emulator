@@ -1,0 +1,32 @@
+@mixin hover-option() {
+  @include glassed(0.15, false);
+  border-radius: $spacer * 0.25;
+}
+
+.appbar {
+  @include flex(0);
+  align-items: center;
+
+  max-height: 32px;
+  padding: 0 $spacer 0 $spacer * 0.5;
+
+  user-select: none;
+
+  @include glassed();
+
+  & div > span,
+  &-icon {
+    max-width: max-content;
+
+    padding: $spacer * 0.125 $spacer * 0.75;
+    @include typography(#fff, $font-size-sm);
+
+    &:active {
+      @include hover-option();
+    }
+
+    &-selected {
+      @include hover-option();
+    }
+  }
+}
