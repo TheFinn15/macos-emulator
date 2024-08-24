@@ -18,6 +18,7 @@ interface Props<OT extends OverlayGeneric> {
     ? BarItemOverlayList[][]
     : ReactNode;
   visible?: boolean;
+  nested?: boolean;
   onClose: () => void;
 }
 
@@ -30,6 +31,8 @@ function OverlayContent<T extends OverlayGeneric>({
   overlay,
   onClose,
 }: OverlayContentProps<T>) {
+  const [hoveredItem, setHoveredItem] = useState(-1);
+
   function isList(data: OverlayGeneric): data is BarItemOverlayList[][] {
     return Array.isArray(data);
   }
@@ -50,7 +53,13 @@ function OverlayContent<T extends OverlayGeneric>({
     }
     if (item.items.length) {
       return (
-        <OverlayView overlay={item.items} onClose={onClose}>
+        <OverlayView
+          key={hoveredItem}
+          nested
+          visible={hoveredItem === item.id}
+          overlay={item.items}
+          onClose={onClose}
+        >
           <i className="i-mdi:chevron-right" />
         </OverlayView>
       );
@@ -75,6 +84,7 @@ function OverlayContent<T extends OverlayGeneric>({
                   'pb-1': ind === 0 || ind !== overlay.length - 1,
                 })}
               >
+                {/* TODO: add pre-selected styles if has items and selection on his  */}
                 <li
                   className={classNames(styles.overlayViewContentGroupItem, {
                     '!pr-0': !!nl.items.length,
@@ -82,6 +92,7 @@ function OverlayContent<T extends OverlayGeneric>({
                     disabled: !!nl.disabled,
                     'cursor-pointer': !nl.items.length,
                   })}
+                  onMouseEnter={() => setHoveredItem(nl.id)}
                 >
                   <span>{nl.label}</span>
                   {additionalItems(nl)}
@@ -102,6 +113,7 @@ function OverlayView<OT extends OverlayGeneric>({
   children,
   visible: forceVisible = false,
   overlay,
+  nested,
   onClose,
 }: Props<OT>) {
   const [visible, setVisible] = useState<boolean>(forceVisible);
@@ -151,7 +163,9 @@ function OverlayView<OT extends OverlayGeneric>({
       {visible && (
         <div
           ref={(ref) => (overlayRef.current = ref)}
-          className={styles.overlayView}
+          className={classNames(styles.overlayView, {
+            'transform-none -top-1 left-20px': nested,
+          })}
         >
           <OverlayContent overlay={overlay} onClose={onClose} />
         </div>

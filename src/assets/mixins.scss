@@ -12,8 +12,8 @@
   font-weight: $weight;
 }
 
-@mixin glassed($opacity: 0.15, $blur: 4px) {
-  background: rgba(255, 255, 255, $opacity);
+@mixin glassed($opacity: 0.15, $blur: 4px, $rgb: #fff) {
+  background: rgba($rgb, $opacity);
 
   @if($blur) {
     backdrop-filter: blur($blur);

@@ -10,6 +10,7 @@ export interface LabelBarItem {
 
 export type BarItem = IconBarItem | LabelBarItem;
 
+// TODO: add variants type for shortcuts and items(non-required fields)
 export type BarItemOverlayList = LabelBarItem & {
   id: number;
   // list of keyboard key icons
