@@ -1,10 +1,12 @@
-import classNames, { Argument } from 'classnames';
-import styles from '../AppBar.module.scss';
+import { Argument } from 'classnames';
+import styles from '@components/AppBar/AppBar.module.scss';
 import { DOMAttributes } from 'react';
-import { BarItem as IBarItem, IconBarItem } from '../../types.ts';
-import { OverlayTemplateProps } from '../props.ts';
+import { BarItem as IBarItem, IconBarItem } from '@components/types.ts';
+import { OverlayTemplateProps } from '../../props.ts';
+import BarItemIcon from './BarItemIcon.tsx';
+import BarItemLabel from './BarItemLabel.tsx';
 
-function OverlayTemplate({
+function BarItemOverlay({
   item,
   ind,
   currentApp,
@@ -25,29 +27,19 @@ function OverlayTemplate({
   }
 
   if (isIcon(item)) {
-    return (
-      <div
-        className={classNames(styles.appbarIcon, {
-          ...stylesAttrs,
-        })}
-        {...attrs}
-      >
-        <i className={item.icon} />
-      </div>
-    );
+    return <BarItemIcon styleAttrs={stylesAttrs} icon={item.icon} {...attrs} />;
   } else {
     return (
-      <span
-        className={classNames({
+      <BarItemLabel
+        label={item.label}
+        styleAttrs={{
           ...stylesAttrs,
           '!font-bold': new RegExp(currentApp, 'gmi').test(item.label),
-        })}
+        }}
         {...attrs}
-      >
-        {item.label}
-      </span>
+      />
     );
   }
 }
 
-export default OverlayTemplate;
+export default BarItemOverlay;

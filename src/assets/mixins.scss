@@ -15,7 +15,7 @@
 @mixin glassed($opacity: 0.15, $blur: 4px, $rgb: #fff) {
   background: rgba($rgb, $opacity);
 
-  @if($blur) {
+  @if ($blur) {
     backdrop-filter: blur($blur);
     -webkit-backdrop-filter: blur($blur);
   }

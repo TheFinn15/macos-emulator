@@ -7,17 +7,20 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "format": "prettier --write ./src"
   },
   "dependencies": {
     "@unocss/reset": "^0.62.2",
     "classnames": "^2.5.1",
+    "date-fns": "^3.6.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
     "@iconify-json/mdi": "^1.1.68",
+    "@iconify-json/mingcute": "^1.1.20",
     "@iconify-json/mynaui": "^1.1.8",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
@@ -35,6 +38,7 @@
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
     "unocss": "^0.62.1",
+    "unplugin-auto-import": "^0.18.2",
     "vite": "^5.4.1"
   }
 }

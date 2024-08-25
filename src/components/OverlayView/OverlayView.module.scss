@@ -4,9 +4,10 @@
   &-view {
     position: absolute;
     transform: translate(1px, 1px);
+    width: max-content;
     min-width: 200px;
 
-    padding: $spacer * 0.5;
+    padding: $spacer * 0.25;
     border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: $spacer * 0.25;
 
@@ -39,7 +40,7 @@
             color: #fff;
           }
 
-          &:hover {
+          &:not(&-opened):hover {
             background: #1459c3;
             border-radius: $spacer * 0.25;
           }

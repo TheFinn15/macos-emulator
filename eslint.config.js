@@ -6,6 +6,7 @@ import tseslint from 'typescript-eslint';
 import unocss from '@unocss/eslint-config/flat';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import react from 'eslint-plugin-react';
+import autoImport from './.eslintrc-auto-import.json' with { type: 'json' };
 
 export default tseslint.config(
   { ignores: ['dist'] },
@@ -18,6 +19,7 @@ export default tseslint.config(
     ],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
+      ...autoImport,
       ecmaVersion: 2020,
       globals: globals.browser,
     },

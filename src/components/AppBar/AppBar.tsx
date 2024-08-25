@@ -1,8 +1,8 @@
 import styles from './AppBar.module.scss';
-import { useMemo, useRef, useState } from 'react';
 import { BaseAppBarItem, SystemApps } from '../types.ts';
-import { apps, appleLogoButton } from '../apps.ts';
-import BarItem from './shared/BarItem.tsx';
+import { appleLogoButton, apps } from '../apps.ts';
+import BarItem from './shared/BarItem/BarItem.tsx';
+import BarActions from './shared/BarActions.tsx';
 
 function AppBar() {
   const [activeApp] = useState<SystemApps>(SystemApps.Finder);
@@ -29,6 +29,8 @@ function AppBar() {
           onHover={setHovered}
         />
       ))}
+      <span className="flex-grow" />
+      <BarActions />
     </div>
   );
 }

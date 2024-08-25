@@ -1,5 +1,10 @@
 import { ReactNode } from 'react';
 
+export interface ListItem<LT = string> {
+  key: LT;
+  value: string;
+}
+
 export interface IconBarItem {
   icon: string;
 }

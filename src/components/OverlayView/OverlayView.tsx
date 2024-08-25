@@ -90,6 +90,8 @@ function OverlayContent<T extends OverlayGeneric>({
                     '!pr-0': !!nl.items.length,
                     '!pr-1': !!nl.shortcut?.length,
                     disabled: !!nl.disabled,
+                    // [styles.overlayViewContentGroupItemOpened]:
+                    //   hoveredItem === nl.id,
                     'cursor-pointer': !nl.items.length,
                   })}
                   onMouseEnter={() => setHoveredItem(nl.id)}

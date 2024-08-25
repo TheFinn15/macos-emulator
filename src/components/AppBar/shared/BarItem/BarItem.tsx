@@ -1,6 +1,6 @@
-import OverlayView from '../../OverlayView/OverlayView.tsx';
-import { BarItemProps } from '../props.ts';
-import OverlayTemplate from './OverlayTemplate.tsx';
+import OverlayView from '../../../OverlayView/OverlayView.tsx';
+import { BarItemProps } from '../../props.ts';
+import BarItemOverlay from './BarItemOverlay.tsx';
 
 function BarItem(props: BarItemProps) {
   const { ind, touched, hovered, onHover, onTouch } = props;
@@ -27,7 +27,7 @@ function BarItem(props: BarItemProps) {
       visible={ind === hovered}
       onClose={onClose}
     >
-      <OverlayTemplate
+      <BarItemOverlay
         {...props}
         hovered={hovered}
         onHover={onHoverItem}

@@ -2,6 +2,52 @@
   @include glassed(0.15, false);
   border-radius: $spacer * 0.25;
 }
+@mixin bar-item() {
+  max-width: max-content;
+
+  padding: $spacer * 0.125 $spacer * 0.75;
+  @include typography(#fff, $font-size-sm);
+
+  &:active {
+    @include hover-option();
+  }
+}
+@mixin overlay-selection() {
+  //padding: $spacer * 0.125 $spacer * 0.5;
+  border-radius: $spacer * 0.25;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.25);
+  }
+}
+
+.overlay-list {
+  @include flex($spacer * 0.5, column);
+  padding: 0.125rem;
+
+  &-splitter {
+    display: block;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  &--items {
+    @include flex($spacer * 0.25, column);
+
+    &-label {
+      @include typography(rgba(255, 255, 255, 0.25), $font-size-xs, 700);
+
+      &-select {
+        @include overlay-selection();
+      }
+    }
+    &-item {
+      @include typography(#fff, $font-size-sm, 400);
+      @include overlay-selection();
+    }
+  }
+}
 
 .appbar {
   @include flex(0);
@@ -14,16 +60,12 @@
 
   @include glassed();
 
-  & div > span,
+  & div:not([class]) span {
+    @include bar-item();
+  }
+
   &-icon {
-    max-width: max-content;
-
-    padding: $spacer * 0.125 $spacer * 0.75;
-    @include typography(#fff, $font-size-sm);
-
-    &:active {
-      @include hover-option();
-    }
+    @include bar-item();
 
     &-selected {
       @include hover-option();
