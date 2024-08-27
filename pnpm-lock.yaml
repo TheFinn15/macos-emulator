@@ -34,6 +34,9 @@ devDependencies:
   '@iconify-json/mynaui':
     specifier: ^1.1.8
     version: 1.1.8
+  '@iconify-json/simple-icons':
+    specifier: ^1.1.114
+    version: 1.1.114
   '@types/react':
     specifier: ^18.3.3
     version: 18.3.4
@@ -933,6 +936,12 @@ packages:
 
   /@iconify-json/mynaui@1.1.8:
     resolution: {integrity: sha512-bBoebXTezdCv7DZQK2xKBbT1XY1DzjscRIHjpUBw0OieOeuxe+VmKLNURFMlEWHT5qaG2fxqwDUGxOHCtD9O5w==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
+  /@iconify-json/simple-icons@1.1.114:
+    resolution: {integrity: sha512-KADlAqTH3/vDTVpS+lwDF0pO/RHgaxf40Hata0QLhAPouygLmhQGPj3ojbpUDfoBGPw/WQ1sor38/2PixR2VRg==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true

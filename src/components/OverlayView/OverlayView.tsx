@@ -7,10 +7,17 @@ import {
   useRef,
   useState,
 } from 'react';
-import { BarItemOverlayList } from '../types.ts';
+import {
+  BarItemOverlayList,
+  LabelOptions,
+  ListOverlayItem,
+  ShortcutOverlayItem,
+} from '../types.ts';
 import classNames from 'classnames';
 
 type OverlayGeneric = ReactNode | BarItemOverlayList[][];
+
+type OverlayItem = ListOverlayItem | ShortcutOverlayItem;
 
 interface Props<OT extends OverlayGeneric> {
   children: ReactNode;
@@ -36,8 +43,18 @@ function OverlayContent<T extends OverlayGeneric>({
   function isList(data: OverlayGeneric): data is BarItemOverlayList[][] {
     return Array.isArray(data);
   }
+  function isShortcuts(data: OverlayItem): data is ShortcutOverlayItem {
+    return !!(data as ShortcutOverlayItem)?.shortcut;
+  }
+  function isItems(data: OverlayItem): data is ListOverlayItem {
+    return !!(data as ListOverlayItem)?.items;
+  }
+  function isStringLabel(data: string | LabelOptions): data is string {
+    return !!(data as string)?.toLowerCase;
+  }
+
   function additionalItems(item: BarItemOverlayList) {
-    if (item.shortcut && item.shortcut.length) {
+    if (isShortcuts(item) && item.shortcut && item.shortcut.length) {
       return (
         <div
           className={classNames(
@@ -51,7 +68,7 @@ function OverlayContent<T extends OverlayGeneric>({
         </div>
       );
     }
-    if (item.items.length) {
+    if (isItems(item) && item.items && item.items.length) {
       return (
         <OverlayView
           key={hoveredItem}
@@ -79,7 +96,7 @@ function OverlayContent<T extends OverlayGeneric>({
           >
             {l.map((nl) => (
               <ul
-                key={nl.label}
+                key={isStringLabel(nl.label) ? nl.label : nl.label.text}
                 className={classNames(styles.overlayViewContentGroup, {
                   'pb-1': ind === 0 || ind !== overlay.length - 1,
                 })}
@@ -87,16 +104,21 @@ function OverlayContent<T extends OverlayGeneric>({
                 {/* TODO: add pre-selected styles if has items and selection on his  */}
                 <li
                   className={classNames(styles.overlayViewContentGroupItem, {
-                    '!pr-0': !!nl.items.length,
-                    '!pr-1': !!nl.shortcut?.length,
+                    '!pr-0': isItems(nl) && !!nl.items?.length,
+                    '!pr-1': isShortcuts(nl) && !!nl.shortcut?.length,
                     disabled: !!nl.disabled,
-                    // [styles.overlayViewContentGroupItemOpened]:
-                    //   hoveredItem === nl.id,
-                    'cursor-pointer': !nl.items.length,
+                    'cursor-pointer': !isItems(nl),
                   })}
                   onMouseEnter={() => setHoveredItem(nl.id)}
                 >
-                  <span>{nl.label}</span>
+                  <span className="flex items-center gap-2">
+                    {!isStringLabel(nl.label) && (
+                      <div>
+                        <i className={nl.label.icon}>{nl.label.icon}</i>
+                      </div>
+                    )}
+                    {isStringLabel(nl.label) ? nl.label : nl.label.text}
+                  </span>
                   {additionalItems(nl)}
                 </li>
               </ul>

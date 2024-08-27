@@ -5,26 +5,42 @@ export interface ListItem<LT = string> {
   value: string;
 }
 
+export interface ShortcutOverlayItem {
+  // list of keyboard key icons
+  shortcut?: string[];
+}
+
+export interface ListOverlayItem {
+  items?: BarItemOverlayList[][];
+}
+
 export interface IconBarItem {
   icon: string;
 }
 
-export interface LabelBarItem {
-  label: string;
+export interface LabelBarItem<LT = string> {
+  label: LT;
 }
 
 export type BarItem = IconBarItem | LabelBarItem;
 
+type OverlayItemAdditional = ShortcutOverlayItem | ListOverlayItem;
+
+export interface LabelOptions {
+  text: string;
+  icon?: string;
+}
+
 // TODO: add variants type for shortcuts and items(non-required fields)
-export type BarItemOverlayList = LabelBarItem & {
-  id: number;
-  // list of keyboard key icons
-  shortcut?: string[];
-  disabled?: boolean;
-  checked?: boolean;
-  onClick?: () => void;
-  items: BarItemOverlayList[][];
-};
+export type BarItemOverlayList = LabelBarItem<LabelOptions | string> &
+  OverlayItemAdditional & {
+    id: number;
+    // shortcut?: string[];
+    disabled?: boolean;
+    checked?: boolean;
+    onClick?: () => void;
+    // items?: BarItemOverlayList[][];
+  };
 
 export type BaseAppBarItem = BarItem & {
   id: number;
