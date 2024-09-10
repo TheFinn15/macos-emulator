@@ -1,5 +1,6 @@
 import 'virtual:uno.css';
 import '@unocss/reset/tailwind.css';
+import 'react-tooltip/dist/react-tooltip.css';
 import './App.scss';
 
 import { StrictMode } from 'react';

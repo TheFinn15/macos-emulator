@@ -15,7 +15,7 @@ function BarActions() {
   );
 
   const actions: ListItem<BarActionsType>[] = [
-    'i-mdi:wifi',
+    'i-ic:wifi',
     'i-mdi:bluetooth',
     'i-mdi:volume',
     'i-mingcute:switch-fill',
